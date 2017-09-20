@@ -1,6 +1,6 @@
 # OpenPBP
 
-OpenPBP is a partially developed asynchronous tabletop gaming application written in Ruby.
+OpenPBP is a partially developed but functional asynchronous tabletop gaming application written in Ruby.
 
 ## Getting Started
 
@@ -18,15 +18,15 @@ These instructions will get you a copy of the project up and running on your loc
 ### Installing
 This section assumes you have Ruby/MariaDB running with the databases setup and configured, if not check the [PREREQUISITES.md](PREREQUISITES.md) file.
 
-#### Download the Project
+#### Get the Project and Install Dependencies
 
-Clone the project
+Clone the Project
 
 ```
 git clone https://github.com/mjolnirdev/OpenPBP.git
 ```
 
-Enter application directory and run bundler
+Enter the Application Directory and Run Bundler
 
 ```
 cd OpenPBP/OpenPBP
@@ -41,7 +41,7 @@ Install Direnv (optional)
 sudo apt install direnv
 ```
 
-Add Direnv to your .bashrc and refresh it
+Add Direnv to Your .bashrc and Refresh It
 ```
 echo 'eval "$(direnv hook bash)"' >> ~/.bashrc
 source ~/.bashrc
@@ -52,29 +52,30 @@ Copy .envrc_example to .envrc
 cp .envrc_example .envrc
 ```
 
-Configure .envrc with your information
+Configure .envrc With Your Information
 ```
 nano .envrc
 ```
 
-Allow the newly edited file
+Allow the Newly Edited File with Direnv
 ```
 direnv allow
 ```
 
 Note: If you choose not to use direnv you'll need to manually set the values therein using `export`.
 
-#### Migrate the database
+#### Migrate the Database
 ```
 rake db:migrate
 ```
 
-#### Run the Padrino server
+#### Run the Padrino Server
 
 ```
-padrino s
+padrino s -h 0.0.0.0
 ```
 
+The server should be accessible at http://yourserverip:3000
 
 ### Deployment
 

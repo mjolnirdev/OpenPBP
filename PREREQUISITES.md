@@ -1,5 +1,5 @@
 ## Install Ruby with rbenv
-### Install dependencies in Ubuntu:
+### Install Dependencies in Ubuntu:
 
 ```
 sudo apt install git build-essential libssl-dev libreadline-dev zlib1g-dev mariadb-server libmariadb-client-lgpl-dev libmariadb-client-lgpl-dev-compat
@@ -17,7 +17,7 @@ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 ```
 
-### Refresh your environment
+### Refresh Your Environment
 ```
 source ~/.bashrc
 ```
@@ -35,7 +35,7 @@ git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-b
 rbenv install 2.4.2
 ```
 
-### Set Ruby version in rbenv
+### Set Global Ruby Version in rbenv
 
 ```
 rbenv global 2.4.2
@@ -55,25 +55,25 @@ sudo mysql_secure_installation
 sudo mysql -u root -p
 ```
 
-### Create the database
+### Create the Database
 
 ```
 CREATE DATABASE openpbp_development;
 ```
 
-### Create a user
+### Create a User
 
 ```
 CREATE USER 'openpbp'@'localhost' IDENTIFIED BY 'YOUR-PASSWORD';
 ```
 
-### Grant your user access to the database
+### Grant Your New User Access to the Database
 
 ```
 GRANT ALL ON openpbp_development.* TO 'openpbp'@'localhost';
 ```
 
-### Flush privileges for the database server
+### Flush Privileges for the Database Server
 ```
 FLUSH PRIVILEGES;
 ```
