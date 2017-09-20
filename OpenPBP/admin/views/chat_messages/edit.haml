@@ -1,0 +1,8 @@
+%ul.nav.nav-tabs
+  %li=link_to tag_icon(:list, pat(:list)), url(:chat_messages, :index)
+  %li=link_to tag_icon(:plus, pat(:new)), url(:chat_messages, :new)
+  %li.active=link_to tag_icon(:edit, pat(:edit)), url(:chat_messages, :edit, :id => @chat_message.id)
+
+.tabs-content
+  = form_for :chat_message, url(:chat_messages, :update, :id => @chat_message.id), :method => :put, :class => 'form-horizontal' do |f|
+    =partial 'chat_messages/form', :locals => { :f => f }

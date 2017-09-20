@@ -1,0 +1,30 @@
+= partial 'notes/note_header'
+= partial 'layouts/breadcrumb'
+%section.section
+  .container
+    %h2.is-size-3.has-text-centered.title New Note
+    .box
+      = form_tag "#{url_builder(@campaign, @chapter, @scene)}/#{@post.pid}/note/new" do
+        = partial 'notes/form'
+        = submit_tag "Create New Note", class: "button is-primary is-medium"
+    .box
+      .media
+        %figure.media-left.is-hidden-touch
+          %p.image.is-128x128
+            %img{src: "#{cloudfront_url(@post.character.portrait, :character)}"}
+            %p.is-size-7.has-text-centered #{@post.character.name}
+        .media-content.content
+          = rd(@post.post).html_safe
+    - @post.replies.each do |reply|
+      .columns
+        .column.is-offset-1
+          .box
+            .media
+              %figure.media-left.is-hidden-touch
+                %p.image.is-96x96
+                  %img{src: "#{cloudfront_url(reply.character.portrait, :character)}"}
+                  %p.is-size-7.has-text-centered #{reply.character.name}
+              .media-content.content
+                = rd(reply.reply).html_safe
+= partial 'chat_messages/sidebar'
+= partial 'notes/sidebar'                  

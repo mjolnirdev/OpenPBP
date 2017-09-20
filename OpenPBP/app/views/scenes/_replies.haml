@@ -1,0 +1,27 @@
+.columns.is-mobile
+  .column.is-offset-1
+    %a(name="#{reply.rid}")
+    .box{class: if reply.character.gm then "gm" end}
+      - unless reply.character.gm
+        .media
+          .media-left
+            %p.image.is-64x64
+              %img{src: "#{cloudfront_url(reply.character.portrait, :character)}"}
+          .media-content.is-reply-meta
+            %p.is-size-6.title
+              #{reply.character.name}
+            %p.is-size-7.subtitle
+              #{reply.user.display_name}
+          .media-right
+            = partial 'replies/menu', :locals => { :post => post, :reply => reply }
+      .media  
+        .media-content.content
+          = rd(reply.reply).html_safe
+          = partial 'replies/dice', :locals => { :reply => reply}
+        - if reply.character.gm
+          .media-right
+            = partial 'replies/menu', :locals => { :post => post, :reply => reply }
+      - if content_owner?(reply, session[:user_id]) || campaign_gm?(@campaign, session[:user_id])
+        .add-dice.has-text-right
+          %a.add-dice.tooltip.is-tooltip-right(data-modal-id="#{reply.rid}" data-tooltip="Add Dice")
+            %img{src: "/images/add_dice.png"}

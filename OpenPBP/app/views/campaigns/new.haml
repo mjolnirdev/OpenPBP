@@ -1,0 +1,12 @@
+.hero.is-primary
+  .hero-body
+    .container
+      %h2.has-text-centered.title Start Your Adventure
+%section.section
+  .container
+    .columns
+      .column.is-6.is-offset-3
+        .box
+          = form_tag '/campaign/new', multipart: true do
+            = partial 'campaigns/form'
+            = submit_tag "Create Campaign", class: "button is-primary is-medium"

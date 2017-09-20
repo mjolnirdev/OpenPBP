@@ -1,0 +1,27 @@
+%section.hero.is-fullheight
+  .hero-body
+    .container
+      .columns
+        .column.is-4.is-offset-4
+          %h1.title
+            %a{href: "/"}
+              %img.image{src: "/images/logo_large.png", alt: "#{ENV['WEBSITE_TITLE']}"}
+          .box
+            = form_tag '/login' do
+              .field
+                %label.label.is-medium{for: "email"} Email:
+                .control.has-icons-left.has-icons-right
+                  = text_field_tag :email, maxlength: "64", class: "input is-medium"
+                  %span.icon.is-small.is-left
+                    %i.fa.fa-envelope
+              .field
+                %label.label.is-medium{for: "password"} Password:
+                .control.has-icons-left.has-icons-right
+                  = password_field_tag :password, maxlength: "64", class: "input is-medium"
+                  %span.icon.is-small.is-left
+                    %i.fa.fa-lock
+              = submit_tag "Login", class: "button is-primary is-fullwidth is-large"
+            %hr
+            .columns
+              %p.column.has-text-centered.is-size-6 Not registered? <a href="/signup">Sign Up</a>.
+              %p.column.has-text-centered.is-size-6 Forgot Password?

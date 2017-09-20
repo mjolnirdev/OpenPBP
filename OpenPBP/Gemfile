@@ -1,0 +1,26 @@
+source 'https://rubygems.org'
+
+# Project requirements
+gem 'padrino', '0.14.1.1'
+gem 'padrino-flash'
+gem 'rake'
+gem "passenger"
+
+# Component requirements
+gem 'activesupport', '>= 3.1'
+gem 'haml'
+gem 'activerecord', '>= 3.1', :require => 'active_record'
+gem 'mysql2'
+
+# Security
+gem 'bcrypt'
+gem 'rack-protection'
+
+# AWS
+gem 'aws-sdk-s3', '~> 1'
+
+# Markdown
+gem 'rdiscount'
+
+# Development
+gem 'bullet', group: 'development'

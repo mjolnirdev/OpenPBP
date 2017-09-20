@@ -1,0 +1,6 @@
+%section.hero.is-dark.is-campaign(style="background-image: url(#{cloudfront_url(@campaign.image, :campaign)});")
+  = partial 'campaigns/header_menu'
+  .hero-body
+    .container
+      %h1.is-size-2.title.has-text-centered 
+        %a.shadow{href: "#{url_builder(@campaign)}"} #{@campaign.title}

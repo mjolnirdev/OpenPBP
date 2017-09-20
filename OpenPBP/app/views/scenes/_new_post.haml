@@ -1,0 +1,12 @@
+%a{name: "new-post"}
+= form_tag "#{url_builder(@campaign, @chapter, @scene)}/posts/new" do
+  .media
+    .media-content
+      .field
+        = text_area_tag :post, class: "textarea"
+      .field.has-addons
+        .control
+          .select
+            = post_as(@campaign, session[:user_id], :charid)
+        .control
+          = submit_tag "New Post", class: "button is-primary"

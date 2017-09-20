@@ -1,0 +1,18 @@
+= partial 'campaigns/campaign_header'
+= partial 'layouts/breadcrumb'
+%section.section
+  .container
+    %h2.is-size-3.has-text-centered.title 
+      #{@character.name}
+    .columns
+      .column.is-3.is-offset-3.has-text-centered
+        %img{src: cloudfront_url(@character.portrait, :character)}
+        - if content_owner?(@character, session[:user_id]) || campaign_gm?(@campaign, session[:user_id])
+          %a.button.is-primary{href: "#{url_builder(@campaign)}/characters/#{@character.charid}/edit"}
+            Edit Character
+          %a.button.is-danger{href: "#{url_builder(@campaign)}/characters/#{@character.charid}/delete"}(data-confirm="This action is permanent and irrevocable, are you sure?")
+            Delete Character
+      .column.is-3
+        =rd(@character.bio).html_safe
+= partial 'chat_messages/sidebar'
+= partial 'notes/sidebar'

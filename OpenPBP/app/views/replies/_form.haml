@@ -1,0 +1,13 @@
+.media
+  %figure.media-left.is-hidden-touch
+    %p.image.is-128x128
+      %img{src: "#{cloudfront_url(@reply.character.portrait, :character)}"}
+    %p.is-size-7.has-text-centered #{@reply.character.name}
+  .media-content
+    = form_tag "#{url_builder(@campaign, @chapter, @scene)}/#{@post.pid}/#{@reply.rid}/edit" do
+      .field
+        %p.control
+          = text_area_tag :reply, class: "textarea", value: @reply.reply
+      = submit_tag "Edit Reply", class: "button is-primary"
+      %a.button.is-danger{href: "#{url_builder(@campaign, @chapter, @scene)}/#{@post.pid}/#{@reply.rid}/delete"}(data-confirm="This action is permanent and irrevocable, are you sure?")
+        Delete Reply

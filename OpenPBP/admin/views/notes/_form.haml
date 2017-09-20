@@ -1,0 +1,55 @@
+- error = @note.errors.include?(:nid)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :nid, :class => 'control-label'
+  .controls
+    =f.text_field :nid, :class => 'form-control input-large input-with-feedback', :autofocus => true
+    %span.help-inline=error ? f.error_message_on(:nid, :class => 'text-error') : pat(:example)
+- error = @note.errors.include?(:post_id)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :post_id, :class => 'control-label'
+  .controls
+    =f.text_field :post_id, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:post_id, :class => 'text-error') : pat(:example)
+- error = @note.errors.include?(:campaign_id)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :campaign_id, :class => 'control-label'
+  .controls
+    =f.text_field :campaign_id, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:campaign_id, :class => 'text-error') : pat(:example)
+- error = @note.errors.include?(:user_id)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :user_id, :class => 'control-label'
+  .controls
+    =f.text_field :user_id, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:user_id, :class => 'text-error') : pat(:example)
+- error = @note.errors.include?(:slug)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :slug, :class => 'control-label'
+  .controls
+    =f.text_field :slug, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:slug, :class => 'text-error') : pat(:example)
+- error = @note.errors.include?(:title)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :title, :class => 'control-label'
+  .controls
+    =f.text_field :title, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:title, :class => 'text-error') : pat(:example)
+- error = @note.errors.include?(:note)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :note, :class => 'control-label'
+  .controls
+    ~f.text_area :note, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:note, :class => 'text-error') : pat(:example)
+- error = @note.errors.include?(:public_note)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :public_note, :class => 'control-label'
+  .controls
+    =f.check_box :public_note, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:public_note, :class => 'text-error') : pat(:example)
+
+.form-actions
+  =f.submit pat(:save), :class => 'btn btn-primary'
+  &nbsp;
+  =f.submit pat(:save_and_continue), :class => 'btn btn-info', :name => 'save_and_continue'
+  &nbsp;
+  =link_to pat(:cancel), url(:notes, :index), :class => 'btn btn-default'

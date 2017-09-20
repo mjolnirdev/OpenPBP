@@ -1,0 +1,50 @@
+.hero.is-primary
+  .hero-body
+    .container
+      %h2.is-size-3.has-text-centered.title Account Details
+%section.section
+  .container
+    %h3.is-size-4.has-text-centered Update Email/Display Name
+    .columns
+      .column.is-4.is-offset-4
+        .box
+          = form_tag '/user/edit' do
+            .field
+              %label.label{for: "email"} Email:
+              .control.has-icons-left.has-icons-right
+                = text_field_tag :email, maxlength: "64", class: "input is-medium", :value => @user.email
+                %span.icon.is-small.is-left
+                  %i.fa.fa-evelope
+            .field
+              %label.label{for: "display_name"} Display Name:
+              .control.has-icons-left.has-icons-right
+                = text_field_tag :display_name, maxlength: "64", class: "input is-medium", :value => @user.display_name
+                %span.icon.is-small.is-left
+                  %i.fa.fa-user
+            = submit_tag "Update Account", class: "button is-primary"
+  %section.section
+    .container
+      %h3.is-size-4.has-text-centered Update Password
+      .columns
+        .column.is-4.is-offset-4
+          .box
+            = form_tag '/user/edit' do
+              .field
+                %label.label{for: "password"} Current Password:
+                .control.has-icons-left.has-icons-right
+                  = password_field_tag :password, maxlength: "240", class: "input is-medium"
+                  %span.icon.is-small.is-left
+                    %i.fa.fa-lock
+              .field
+                %label.label{for: "new_password"} NewPassword:
+                .control.has-icons-left.has-icons-right
+                  = password_field_tag :new_password, maxlength: "240", class: "input is-medium"
+                  %span.icon.is-small.is-left
+                    %i.fa.fa-lock
+              .field
+                %label.label{for: "new_password_confirmation"} Confirm New Password:
+                .control.has-icons-left.has-icons-right
+                  = password_field_tag :new_password_confirmation, maxlength: "240", class: "input is-medium"
+                  %span.icon.is-small.is-left
+                    %i.fa.fa-lock
+              = submit_tag "Update Password", class: "button is-primary"

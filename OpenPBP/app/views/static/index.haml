@@ -1,0 +1,56 @@
+.hero.is-dark.is-medium.is-indexbanner
+  .hero-body
+    .container
+      .columns
+        .column.is-4.is-offset-1
+          %h1.title
+            %img.image{src: "/images/logo_large.png", alt: "RollBYPost"}
+        .column.is-4.is-offset-2
+          %p.banner-text
+            %span.shadow #{ENV['WEBSITE_TITLE']} is an asynchronous table-top gaming platform that aims to modernize and improve PlayByPost gaming.
+          %a.button.is-success{href: "/signup"} Signup
+          %a.button.is-primary{href: "/login"} Login
+%section.section
+  .container
+    .content
+      .columns.index
+        .column
+          .card
+            .card-header
+              .card-header-title Integrated Dice Rolling
+            .card-image
+              %figure.image
+                %img{src: "/images/wank/integrated_dice.png", alt: "Integrated Dice Rolling"}                
+            .card-content
+              .content
+                %p Supports standard D+mod style dice (e.g. 1d20+5 or 2d12+1d6+1) as well as hit style dice (e.g. 6d6>4).
+        .column
+          .card
+            .card-header
+              .card-header-title Chapter/Scene Organization
+            .card-image
+              %figure.image
+                %img{src: "/images/wank/chapter_scene_organization.png", alt: "Chapter/Scene Organization"}
+            .card-content
+              .content
+                %p Separate out your adventures into Chapters and Scenes to help organize your campaign's flow.
+        .column
+          .card
+            .card-header
+              .card-header-title Post Aliasing
+            .card-image
+              %figure.image
+                %img{src: "/images/wank/post_aliasing.png", alt: "Post Aliasing"}
+            .card-content
+              .content
+                %p Allows GMs and players to post as multiple characters, each with their own portrait.
+        .column
+          .card
+            .card-header
+              .card-header-title Mobile Friendly
+            .card-image
+              %figure.image
+                %img{src: "/images/wank/mobile_friendly.png", alt: "Mobile Friendly"}                
+            .card-content
+              .content
+                %p #{ENV['WEBSITE_TITLE']} is built with mobile in mind, the layout shrinks and expands with whichever device you're using.

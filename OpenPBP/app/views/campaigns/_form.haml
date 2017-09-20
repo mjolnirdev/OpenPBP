@@ -1,0 +1,33 @@
+- if @campaign.errors.first
+  .notification.is-danger 
+    %ul
+    - @campaign.errors.full_messages.each do |msg|
+      %li #{msg}.
+.field
+  %label.label{for: "title"} Title:
+  .control.has-icons-left.has-icons-right
+    = text_field_tag :title, class: "input is-medium", id: "title", maxlength: "64", placeholder: "e.g. Your Awesome Adventure", value: @campaign.title
+    %span.icon.is-small.is-left
+      %i.fa.fa-header
+.field
+  %label.label{for: "slug"} URL Slug:
+  .control.has-icons-left.has-icons-right
+    = text_field_tag :slug, class: "input", id: "slug", maxlength: "64", placeholder: "e.g. your-awesome-adventure", value: @campaign.slug
+    %span.icon.is-small.is-left
+      %i.fa.fa-link
+    %p.help Lowercase letters, numbers and dashes only.
+.field
+  %label.label{for: "description"} Description:
+  .control.has-icons-left.has-icons-right
+    = text_area_tag :description, class: "textarea", value: @campaign.description
+.field
+  %label.label{for: "campaign_image"}
+  .file.has-name
+    %label.file-label
+      = file_field_tag :image, class: "file-input"
+      %span.file-cta
+        %span.file-icon
+          %i.fa.fa-upload
+        %span.file-label Choose a file...
+      %span.file-name your-campaign-image.jpg
+  %p.help PNG, JPG only. 2MB Maximum.

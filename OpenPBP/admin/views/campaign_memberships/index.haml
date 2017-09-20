@@ -1,0 +1,60 @@
+%ul.nav.nav-tabs
+  %li.active=link_to tag_icon(:list, pat(:list)), url(:campaign_memberships, :index)
+  %li=link_to tag_icon(:plus, pat(:new)), url(:campaign_memberships, :new)
+
+.tabs-content
+  %table#list.table.table-striped.table-hover.table-condensed
+    %thead
+      %tr
+        %th.header.list-menu
+          .dropdown
+            %a.list-menu-toggle.dropdown-toggle{:href => '#', :'data-toggle' => :dropdown}
+              =tag_icon :magic
+              %span.caret
+            %ul.list-menu.dropdown-menu{:role => :menu}
+              %li.list-menu-wrapper=link_to tag_icon('check-square-o', pat(:select_all)), '#', :id => 'select-all', :class => 'list-menu-link'
+              %li.list-menu-wrapper.list-menu-wrapper-disabled
+                =link_to tag_icon('square-o', pat(:deselect_all)), '#', :id => 'deselect-all', :class => 'list-menu-link list-menu-link-disabled'
+              %li.list-menu-divider.divider
+              %li.list-menu-wrapper.list-menu-wrapper-disabled
+                =link_to tag_icon('trash-o', pat(:delete_selected)), '#', :id => 'delete-selected', :class => 'list-menu-link list-menu-link-disabled'
+                .list-menu-popover-delete-selected.popover.right
+                  .arrow
+                  %h3.popover-title=pat(:delete_selected_title)
+                  .popover-content
+                    = form_tag url(:campaign_memberships, :destroy_many), :method => :delete do
+                      =hidden_field_tag :campaign_membership_ids, :'data-delete-many-ids' => true
+                      =submit_tag pat(:delete), :class =>'list-menu-popover-delete-selected-btn btn btn-danger btn-small'
+                      .btn.btn-default.btn-small.cancel=pat(:cancel)
+        %th.header= mat(:campaign_membership, :id)
+        %th.header= mat(:campaign_membership, :user_id)
+        %th.header= mat(:campaign_membership, :campaign_id)
+        %th.header= mat(:campaign_membership, :gm)
+        %th.header= mat(:campaign_membership, :owner)
+        %th.header= mat(:campaign_membership, :created_at)
+        %th.header= mat(:campaign_membership, :updated_at)
+        %th.header.list-row-action-header
+
+    %tbody
+      -@campaign_memberships.each do |campaign_membership|
+        %tr.list-row
+          %td.list-column.list-selectable
+            =check_box_tag 'campaign_membership_ids[]', :value => campaign_membership.id, :class => 'list-selectable-checkbox'
+          %td.list-column=campaign_membership.id
+          %td.list-column=campaign_membership.user_id
+          %td.list-column=campaign_membership.campaign_id
+          %td.list-column= campaign_membership.gm ? tag_icon(:ok) : tag_icon(:remove)
+          %td.list-column= campaign_membership.owner ? tag_icon(:ok) : tag_icon(:remove)
+          %td.list-column=time_ago_in_words campaign_membership.created_at
+          %td.list-column=time_ago_in_words campaign_membership.updated_at
+          %td.list-column.list-row-action
+            .list-row-action-wrapper
+              =link_to tag_icon(:edit), :href => url(:campaign_memberships, :edit, :id => campaign_membership.id), :rel => :tooltip, :title => "#{pat(:edit)} campaign_membership", :class => 'list-row-action-wrapper-link'
+              =link_to tag_icon('trash-o'), :rel => :tooltip, :title => "#{pat(:delete)} campaign_membership", :class => 'list-row-action-delete-one list-row-action-wrapper-link'
+              .popover.list-row-action-popover-delete-one.left
+                .arrow
+                %h3.popover-title=pat(:delete, :model => "campaign_membership")
+                .popover-content
+                  = form_tag url(:campaign_memberships, :destroy, :id => campaign_membership.id), :method => :delete do
+                    =submit_tag pat(:delete), :class =>'list-row-action-popover-delete-one-btn btn btn-danger btn-small'
+                    .btn.btn-default.btn-small.cancel=pat(:cancel)

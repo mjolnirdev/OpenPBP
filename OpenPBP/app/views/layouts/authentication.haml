@@ -1,0 +1,22 @@
+!!! 5
+%html
+  %head
+    %title OpenPBP
+    %meta{charset: "utf-8"}
+    %meta{content: "width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no", name: "viewport"}
+    %meta{name: "theme-color", content: "#0094bf"}
+    %link{rel: :stylesheet, type: :"text/css", href: "/stylesheets/openpbp.min.css"}
+    %link{rel: :stylesheet, type: :"text/css", href: "/stylesheets/openpbp.css"}    
+    %link{rel: :stylesheet, type: :"text/css", href: "/stylesheets/croppie.css"}  
+    %link{rel: :stylesheet, type: :"text/css", href: "https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i"}
+    %link{rel: :stylesheet, type: :"text/css", href: "https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i"}
+    %script{:type => "text/javascript", :src  => "/javascripts/jquery.js"}
+    %script{:type => "text/javascript", :src  => "/javascripts/jquery-ujs.js"}
+    %script{:type => "text/javascript", :src  => "/javascripts/application.js"}
+    %script{:type => "text/javascript", :src  => "/javascripts/croppie.js"}
+    %script{:type => "text/javascript", :src  => "https://use.fontawesome.com/2aeb71a2ad.js"}
+  %body
+    - flash.each do |name, msg|
+      = content_tag :div, msg, class: "notification has-text-centered #{flash_type(name)} is-authentication-notice"
+    = yield
+  %script{:type => "text/javascript", :src  => "/javascripts/application-after.js"}        

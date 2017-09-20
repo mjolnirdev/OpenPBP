@@ -1,0 +1,10 @@
+%ul
+  - if content_owner?(reply, session[:user_id])
+    %li
+      %a.has-text-grey{href: "#{url_builder(@campaign, @chapter, @scene)}/#{post.pid}/#{reply.rid}/edit"}
+        %span.icon.is-small.tooltip.is-tooltip-right(data-tooltip="Edit Reply")
+          %i.fa.fa-pencil
+  %li
+    %a.has-text-grey.reply-toggle(data-reply-class="reply-#{post.pid}" href="##{post.pid}-reply-form")
+      %span.icon.is-small.tooltip.is-tooltip-right(data-tooltip="Reply")
+        %i.fa.fa-reply

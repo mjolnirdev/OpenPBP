@@ -1,0 +1,51 @@
+.quickview.is-left{id: "sidebar-chat"}
+  %header.quickview-header
+    %h3.is-size-5 Out of Character Chat
+    %a.has-text-grey{id: "sidebar-chat-close"}
+      %span.icon
+        %i.fa.fa-chevron-left
+  .quickview-body{id: "sidebar-chat-content"}
+    %span Loading chat
+  %footer.quickview-footer
+    = form_tag "#{url_builder(@campaign)}/ooc/new", remote: true do
+      .field.has-addons
+        .control.is-expanded
+          = text_field_tag :message, class: "input", id: "chat-input"
+        .control
+          = submit_tag "Send", class: "button is-primary", id: "chat-send"
+      .field
+        .select.is-fullwidth
+          = chat_as(@campaign, session[:user_id])
+      
+:javascript
+  function getChatCount(){
+    $.ajax({url: "#{url_builder(@campaign)}/ooc/count", cache: true, success: function(result){
+      if (result != $.cookie("chatCount-#{@campaign.cid}")){
+        getChat();
+        $.cookie('chatCount-#{@campaign.cid}', result, { path: '/' });
+      };
+      if ($.cookie("chatCount-#{@campaign.cid}-read") == undefined){
+        $.cookie('chatCount-#{@campaign.cid}-read', $.cookie("chatCount-#{@campaign.cid}"), { path: '/' });
+      };
+    }});
+    if ($.cookie("chatCount-#{@campaign.cid}") != $.cookie("chatCount-#{@campaign.cid}-read")){
+      $('#sidebar-chat-expand').addClass("has-text-success");
+    } else {
+      $('#sidebar-chat-expand').removeClass("has-text-success");
+    };
+  };
+  function getChat(){
+    if ($("#sidebar-chat").hasClass("is-active")){
+      $.ajax({url: "#{url_builder(@campaign)}/ooc", cache: true, success: function(result){
+        $('#sidebar-chat-content').html(result);
+        $('#sidebar-chat-content').scrollTop($('#sidebar-chat-content')[0].scrollHeight);
+        $.cookie('chatCount-#{@campaign.cid}-read', $.cookie("chatCount-#{@campaign.cid}"), { path: '/' });
+      }});
+    };
+  }
+  setInterval(getChatCount, 3000);
+%a.has-text-light{id: "sidebar-chat-expand"}
+  .ooc-chat-expand
+    %span.icon
+      %i.fa.fa-comments
+        

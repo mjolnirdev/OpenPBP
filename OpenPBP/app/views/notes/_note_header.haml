@@ -1,0 +1,9 @@
+%section.hero.is-dark.is-campaign(style="background-image: url(#{cloudfront_url(@campaign.image, :campaign)});")
+  .hero-body
+    .container
+      %h1.title
+        %span.shadow 
+          %a{href: "#{url_builder(@campaign, @chapter, @scene)}"} #{@scene.title}
+      %h2.subtitle
+        %span.shadow 
+          #{@scene.description}

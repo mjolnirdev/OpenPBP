@@ -1,0 +1,23 @@
+.hero-head
+  .container
+    .dropdown.is-hoverable.is-pulled-right
+      .dropdown-trigger
+        %button.button.is-dark
+          %span.icon.is-small
+            %i.fa.fa-bars
+          %span Campaign Menu
+          %span.icon.is-small
+            %i.fa.fa-angle-down
+      .dropdown-menu
+        .dropdown-content
+          = partial 'campaigns/header_menu_base'
+          %hr.dropdown-divider
+          - if campaign_gm?(@campaign, session[:user_id])
+            = partial 'campaigns/header_menu_gm'
+          - if campaign_owner?(@campaign, session[:user_id])
+            = partial 'campaigns/header_menu_owner'
+          - else
+            %a.has-text-danger.dropdown-item{href: "#{url_builder(@campaign)}/leave"}
+              %span.icon.is-small
+                %i.fa.fa-times
+              %span Leave Campaign

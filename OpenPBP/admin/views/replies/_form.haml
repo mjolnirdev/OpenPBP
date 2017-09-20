@@ -1,0 +1,37 @@
+- error = @reply.errors.include?(:post_id)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :post_id, :class => 'control-label'
+  .controls
+    =f.text_field :post_id, :class => 'form-control input-large input-with-feedback', :autofocus => true
+    %span.help-inline=error ? f.error_message_on(:post_id, :class => 'text-error') : pat(:example)
+- error = @reply.errors.include?(:user_id)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :user_id, :class => 'control-label'
+  .controls
+    =f.text_field :user_id, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:user_id, :class => 'text-error') : pat(:example)
+- error = @reply.errors.include?(:character_id)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :character_id, :class => 'control-label'
+  .controls
+    =f.text_field :character_id, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:character_id, :class => 'text-error') : pat(:example)
+- error = @reply.errors.include?(:rid)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :rid, :class => 'control-label'
+  .controls
+    =f.text_field :rid, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:rid, :class => 'text-error') : pat(:example)
+- error = @reply.errors.include?(:reply)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :reply, :class => 'control-label'
+  .controls
+    ~f.text_area :reply, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:reply, :class => 'text-error') : pat(:example)
+
+.form-actions
+  =f.submit pat(:save), :class => 'btn btn-primary'
+  &nbsp;
+  =f.submit pat(:save_and_continue), :class => 'btn btn-info', :name => 'save_and_continue'
+  &nbsp;
+  =link_to pat(:cancel), url(:replies, :index), :class => 'btn btn-default'

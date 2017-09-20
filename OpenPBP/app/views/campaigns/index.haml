@@ -1,0 +1,33 @@
+.hero.is-primary
+  .hero-body
+    .container
+      %h2.has-text-centered.title Your Campaigns
+- unless @campaigns.first.nil?
+  %section.section
+    .container
+      - @campaigns.in_groups_of(4, false).each do |group|
+        .columns
+          - group.each do |campaign|
+            .column.is-3
+              .card.has-ribbon
+                - if new_posts(campaign, session[campaign.cid]) > 0
+                  .ribbon.is-danger.is-medium
+                    %a.has-text-white{href: "#{url_builder(campaign, campaign.chapters.last, campaign.chapters.last.scenes.last)}"}
+                      #{new_posts(campaign, session[campaign.cid])} New Posts
+                %a{href: "#{url_builder(campaign)}"} 
+                  .card-image
+                    %figure.image
+                      %img{src: cloudfront_url(campaign.image, :campaign)}
+                  .card-content
+                    %h3.is-size-5.has-text-centered
+                      #{campaign.title}
+                      .field
+                        - if campaign_gm?(campaign, session[:user_id])
+                          %span.tag.is-primary.is-small GM
+                        - if campaign_owner?(campaign, session[:user_id])
+                          %span.tag.is-warning.is-small Owner
+%section.section
+  .container
+    .columns
+      .column.is-4.is-offset-4.has-text-centered
+        %a.button.is-primary.is-large{href: "/campaign/new"} Start a New Campaign

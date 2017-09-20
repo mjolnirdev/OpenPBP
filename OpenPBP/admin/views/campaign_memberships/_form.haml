@@ -1,0 +1,31 @@
+- error = @campaign_membership.errors.include?(:user_id)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :user_id, :class => 'control-label'
+  .controls
+    =f.text_field :user_id, :class => 'form-control input-large input-with-feedback', :autofocus => true
+    %span.help-inline=error ? f.error_message_on(:user_id, :class => 'text-error') : pat(:example)
+- error = @campaign_membership.errors.include?(:campaign_id)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :campaign_id, :class => 'control-label'
+  .controls
+    =f.text_field :campaign_id, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:campaign_id, :class => 'text-error') : pat(:example)
+- error = @campaign_membership.errors.include?(:gm)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :gm, :class => 'control-label'
+  .controls
+    =f.check_box :gm, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:gm, :class => 'text-error') : pat(:example)
+- error = @campaign_membership.errors.include?(:owner)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :owner, :class => 'control-label'
+  .controls
+    =f.check_box :owner, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:owner, :class => 'text-error') : pat(:example)
+
+.form-actions
+  =f.submit pat(:save), :class => 'btn btn-primary'
+  &nbsp;
+  =f.submit pat(:save_and_continue), :class => 'btn btn-info', :name => 'save_and_continue'
+  &nbsp;
+  =link_to pat(:cancel), url(:campaign_memberships, :index), :class => 'btn btn-default'

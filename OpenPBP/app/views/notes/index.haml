@@ -1,0 +1,32 @@
+= partial 'campaigns/campaign_header'
+= partial 'layouts/breadcrumb'
+%section.section
+  .container
+    - @notes.each do |note|
+      .box
+        .media
+          .media-content
+            %h3.is-size-4.title 
+              %a{href: "#{url_builder(@campaign)}/notes/#{note.nid}/#{note.slug}/"} #{note.title}
+            = rd(note.note).html_safe
+          .media-right
+            %ul
+              - if content_owner?(note, session[:user_id])
+                %li
+                  %a.has-text-grey{href: "#{url_builder(@campaign)}/notes/#{note.nid}/#{note.slug}/edit"}
+                    %span.icon.is-small.tooltip.is-tooltip-right(data-tooltip="Edit Note")
+                      %i.fa.fa-pencil
+              %li
+                %a.has-text-grey{href: "#{url_builder(@campaign, note.post.scene.chapter, note.post.scene)}\##{note.post.pid}"}
+                  %span.icon.is-small.tooltip.is-tooltip-right(data-tooltip="Link to Post")
+                    %i.fa.fa-link
+        %hr
+        .media
+          %figure.media-left.is-hidden-touch
+            %p.image.is-128x128
+              %img{src: "#{cloudfront_url(note.post.character.portrait, :character)}"}
+              %p.is-size-7.has-text-centered #{note.post.character.name}
+          .media-content.content
+            = rd(note.post.post).html_safe
+= partial 'chat_messages/sidebar'
+= partial 'notes/sidebar'            

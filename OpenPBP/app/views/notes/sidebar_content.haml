@@ -1,0 +1,20 @@
+- if @notes.count > 0
+  - @notes.each do |note|
+    .media
+      .media-content
+        %h5.is-size-5 
+          %a{href: "#{url_builder(@campaign)}/notes/#{note.nid}/#{note.slug}"} #{note.title}
+        %p #{truncate_words(note.note, length: 14)}
+      .media-right
+        %ul
+          %li
+            %a.has-text-grey{href: "#{url_builder(@campaign)}/notes/#{note.nid}/#{note.slug}/edit"}
+              %span.icon.is-small.tooltip.is-tooltip-left(data-tooltip="Edit Note")
+                %i.fa.fa-pencil
+          %li
+            %a.has-text-grey{href: "#{url_builder(@campaign, note.post.scene.chapter, note.post.scene)}\##{note.post.pid}"}
+              %span.icon.is-small.tooltip.is-tooltip-left(data-tooltip="Link to Post")
+                %i.fa.fa-link
+    %hr
+- else
+  %h5.is-size-6 You don't have any notes for this campaign.

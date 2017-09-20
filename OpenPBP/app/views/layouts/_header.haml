@@ -1,0 +1,12 @@
+%nav.navbar
+  .container
+    .navbar-brand
+      %a.navbar-item{href: "/"}
+        %img.logo{src: "/images/logo.png", alt: "#{ENV['WEBSITE_TITLE']}"}
+      .navbar-burger.burger(data-target="navMenu")
+        %span
+        %span
+        %span
+    .navbar-menu#navMenu
+      .navbar-end 
+        =partial 'layouts/user_navigation'

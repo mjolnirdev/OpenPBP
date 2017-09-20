@@ -1,0 +1,15 @@
+%a{name: "#{post.pid}-reply-form"}
+.columns.is-hidden{class: "reply-#{post.pid}"}
+  .column.is-offset-1
+    .media
+      .media-content
+        = form_tag "#{url_builder(@campaign, @chapter, @scene)}/#{post.pid}/reply/new" do
+          .field
+            .control
+              = text_area_tag :reply, class: "textarea"
+          .field.has-addons
+            .control
+              .select
+                = post_as(@campaign, session[:user_id], :charid)
+            .control
+              = submit_tag "New Reply", class: "button is-primary"  

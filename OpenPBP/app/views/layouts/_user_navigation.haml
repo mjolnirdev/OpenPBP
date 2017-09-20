@@ -1,0 +1,10 @@
+- if session[:user_id]
+  %a.navbar-item{href: "/campaigns"} Campaigns
+  .navbar-item.has-dropdown.is-hoverable
+    %a.navbar-link{href: "/dashboard"} Hello, #{@user.display_name}!
+    .navbar-dropdown
+      %a.navbar-item{href: "/user/edit"} Edit Account Details
+      %a.navbar-item{href: "/logout"} Logout
+- else
+  %a.navbar-item{href: "/login"} Login
+  %a.navbar-item{href: "/signup"} Signup  

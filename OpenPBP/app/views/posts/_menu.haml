@@ -1,0 +1,20 @@
+%ul
+  %li
+    - note = @user.notes.find_by_post_id(post.id)
+    - if note
+      %a.has-text-danger{href: "#{url_builder(@campaign)}/notes/#{note.nid}/#{note.slug}"}
+        %span.icon.is-small.tooltip.is-tooltip-right(data-tooltip="View Note")
+          %i.fa.fa-bookmark
+    - else
+      %a.has-text-grey{href: "#{url_builder(@campaign, @chapter, @scene)}/#{post.pid}/note/new"}
+        %span.icon.is-small.tooltip.is-tooltip-right(data-tooltip="Add Note")
+          %i.fa.fa-bookmark
+  - if content_owner?(post, session[:user_id])
+    %li
+      %a.has-text-grey{href: "#{url_builder(@campaign, @chapter, @scene)}/#{post.pid}/edit"}
+        %span.icon.is-small.tooltip.is-tooltip-right(data-tooltip="Edit Post")
+          %i.fa.fa-pencil
+  %li
+    %a.has-text-grey.reply-toggle(data-reply-class="reply-#{post.pid}" href="##{post.pid}-reply-form")
+      %span.icon.is-small.tooltip.is-tooltip-right(data-tooltip="Reply")
+        %i.fa.fa-reply

@@ -1,0 +1,32 @@
+= partial 'notes/note_header'
+= partial 'layouts/breadcrumb'
+%section.section
+  .container
+    %h2.is-size-3.has-text-centered.title Editing Note
+    .box
+      = form_tag "#{url_builder(@campaign)}/notes/#{@note.nid}/#{@note.slug}/edit" do
+        = partial 'notes/form'
+        = submit_tag "Edit Note", class: "button is-primary is-medium"
+        %a.button.is-danger.is-medium{href: "#{url_builder(@campaign)}/notes/#{@note.nid}/#{@note.slug}/delete"}(data-confirm="This action is permanent and irrevocable, are you sure?")
+          Delete Note
+    .box
+      .media
+        %figure.media-left.is-hidden-touch
+          %p.image.is-128x128
+            %img{src: "#{cloudfront_url(@post.character.portrait, :character)}"}
+            %p.is-size-7.has-text-centered #{@post.character.name}
+        .media-content.content
+          = rd(@post.post).html_safe
+    - @post.replies.each do |reply|
+      .columns
+        .column.is-offset-1
+          .box
+            .media
+              %figure.media-left.is-hidden-touch
+                %p.image.is-96x96
+                  %img{src: "#{cloudfront_url(reply.character.portrait, :character)}"}
+                  %p.is-size-7.has-text-centered #{reply.character.name}
+              .media-content.content
+                = rd(reply.reply).html_safe
+= partial 'chat_messages/sidebar'
+= partial 'notes/sidebar'                

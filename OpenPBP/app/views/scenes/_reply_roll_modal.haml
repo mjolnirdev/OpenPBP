@@ -1,0 +1,12 @@
+.modal{id: reply.rid}
+  .modal-background(data-modal-id="#{reply.rid}")
+  .modal-content
+    .box
+      %h4.title.has-text-centered Adding Dice to Reply
+      = form_tag "#{url_builder(@campaign, @chapter, @scene)}/#{post.pid}/#{reply.rid}/dice/add" do
+        .field.has-addons.has-addons-centered
+          .control
+            = text_field_tag :pool, class: "input", placeholder: "e.g 1d20+5 or 2d12+5"
+          .control
+            = submit_tag "Add Dice", class: "button is-primary"
+  %button.modal-close.is-large(data-modal-id="#{reply.rid}")

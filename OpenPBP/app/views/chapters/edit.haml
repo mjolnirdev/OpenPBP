@@ -1,0 +1,13 @@
+= partial 'chapters/chapter_header'
+= partial 'layouts/breadcrumb'
+%section.section
+  .container
+    %h2.is-size-3.has-text-centered.title Editing #{@chapter.title}
+    .columns
+      .column.is-4.is-offset-4
+        .box
+          = form_tag "#{url_builder(@campaign)}/#{@chapter.slug}/edit" do
+            = partial 'chapters/form'
+            = submit_tag "Edit Chapter", class: "button is-primary is-medium"
+= partial 'chat_messages/sidebar'
+= partial 'notes/sidebar'  

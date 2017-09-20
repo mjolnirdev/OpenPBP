@@ -1,0 +1,29 @@
+%section.hero.is-dark.is-campaign(style="background-image: url(#{cloudfront_url(@campaign.image, :campaign)});")
+  = partial 'campaigns/header_menu'
+  .hero-body
+    .container
+      %h1.title 
+        %span.shadow #{@campaign.title}
+      %h2.subtitle
+        %span.shadow #{@campaign.description}
+= partial 'layouts/breadcrumb'              
+%section.section
+  .container
+    .columns
+      .column
+        = partial 'campaigns/timeline'
+      .column.is-4
+        - @campaign.characters.where(default: true).in_groups_of(2, false).each do |character_set|
+          .columns.is-mobile
+            - character_set.each do |character|
+              .column.is-half
+                %a{href: "#{url_builder(@campaign)}/characters/#{character.charid}"}
+                  .card
+                    .card-image
+                      %figure.image
+                        %img{src: "#{cloudfront_url(character.portrait, :character)}"}
+                    .card-content
+                      %h4.is-size-6.title #{character.name}
+                      %h5.is-size-7.subtitle #{character.user.display_name}
+= partial 'chat_messages/sidebar'
+= partial 'notes/sidebar'

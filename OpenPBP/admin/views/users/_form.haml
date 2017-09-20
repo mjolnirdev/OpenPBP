@@ -1,0 +1,49 @@
+- error = @user.errors.include?(:uid)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :uid, :class => 'control-label'
+  .controls
+    =f.text_field :uid, :class => 'form-control input-large input-with-feedback', :autofocus => true
+    %span.help-inline=error ? f.error_message_on(:uid, :class => 'text-error') : pat(:example)
+- error = @user.errors.include?(:email)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :email, :class => 'control-label'
+  .controls
+    =f.text_field :email, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:email, :class => 'text-error') : pat(:example)
+- error = @user.errors.include?(:display_name)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :display_name, :class => 'control-label'
+  .controls
+    =f.text_field :display_name, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:display_name, :class => 'text-error') : pat(:example)
+- error = @user.errors.include?(:password_hash)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :password_hash, :class => 'control-label'
+  .controls
+    =f.text_field :password_hash, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:password_hash, :class => 'text-error') : pat(:example)
+- error = @user.errors.include?(:email_confirmed)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :email_confirmed, :class => 'control-label'
+  .controls
+    =f.check_box :email_confirmed, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:email_confirmed, :class => 'text-error') : pat(:example)
+- error = @user.errors.include?(:password_reset)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :password_reset, :class => 'control-label'
+  .controls
+    =f.check_box :password_reset, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:password_reset, :class => 'text-error') : pat(:example)
+- error = @user.errors.include?(:password_link)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :password_link, :class => 'control-label'
+  .controls
+    =f.text_field :password_link, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:password_link, :class => 'text-error') : pat(:example)
+
+.form-actions
+  =f.submit pat(:save), :class => 'btn btn-primary'
+  &nbsp;
+  =f.submit pat(:save_and_continue), :class => 'btn btn-info', :name => 'save_and_continue'
+  &nbsp;
+  =link_to pat(:cancel), url(:users, :index), :class => 'btn btn-default'

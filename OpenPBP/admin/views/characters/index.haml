@@ -1,0 +1,70 @@
+%ul.nav.nav-tabs
+  %li.active=link_to tag_icon(:list, pat(:list)), url(:characters, :index)
+  %li=link_to tag_icon(:plus, pat(:new)), url(:characters, :new)
+
+.tabs-content
+  %table#list.table.table-striped.table-hover.table-condensed
+    %thead
+      %tr
+        %th.header.list-menu
+          .dropdown
+            %a.list-menu-toggle.dropdown-toggle{:href => '#', :'data-toggle' => :dropdown}
+              =tag_icon :magic
+              %span.caret
+            %ul.list-menu.dropdown-menu{:role => :menu}
+              %li.list-menu-wrapper=link_to tag_icon('check-square-o', pat(:select_all)), '#', :id => 'select-all', :class => 'list-menu-link'
+              %li.list-menu-wrapper.list-menu-wrapper-disabled
+                =link_to tag_icon('square-o', pat(:deselect_all)), '#', :id => 'deselect-all', :class => 'list-menu-link list-menu-link-disabled'
+              %li.list-menu-divider.divider
+              %li.list-menu-wrapper.list-menu-wrapper-disabled
+                =link_to tag_icon('trash-o', pat(:delete_selected)), '#', :id => 'delete-selected', :class => 'list-menu-link list-menu-link-disabled'
+                .list-menu-popover-delete-selected.popover.right
+                  .arrow
+                  %h3.popover-title=pat(:delete_selected_title)
+                  .popover-content
+                    = form_tag url(:characters, :destroy_many), :method => :delete do
+                      =hidden_field_tag :character_ids, :'data-delete-many-ids' => true
+                      =submit_tag pat(:delete), :class =>'list-menu-popover-delete-selected-btn btn btn-danger btn-small'
+                      .btn.btn-default.btn-small.cancel=pat(:cancel)
+        %th.header= mat(:character, :id)
+        %th.header= mat(:character, :campaign_id)
+        %th.header= mat(:character, :user_id)
+        %th.header= mat(:character, :charid)
+        %th.header= mat(:character, :name)
+        %th.header= mat(:character, :portrait)
+        %th.header= mat(:character, :bio)
+        %th.header= mat(:character, :gm)
+        %th.header= mat(:character, :default)
+        %th.header= mat(:character, :retired)
+        %th.header= mat(:character, :created_at)
+        %th.header= mat(:character, :updated_at)
+        %th.header.list-row-action-header
+
+    %tbody
+      -@characters.each do |character|
+        %tr.list-row
+          %td.list-column.list-selectable
+            =check_box_tag 'character_ids[]', :value => character.id, :class => 'list-selectable-checkbox'
+          %td.list-column=character.id
+          %td.list-column=character.campaign_id
+          %td.list-column=character.user_id
+          %td.list-column=character.charid
+          %td.list-column=character.name
+          %td.list-column=character.portrait
+          %td.list-column=character.bio
+          %td.list-column= character.gm ? tag_icon(:ok) : tag_icon(:remove)
+          %td.list-column= character.default ? tag_icon(:ok) : tag_icon(:remove)
+          %td.list-column= character.retired ? tag_icon(:ok) : tag_icon(:remove)
+          %td.list-column=time_ago_in_words character.created_at
+          %td.list-column=time_ago_in_words character.updated_at
+          %td.list-column.list-row-action
+            .list-row-action-wrapper
+              =link_to tag_icon(:edit), :href => url(:characters, :edit, :id => character.id), :rel => :tooltip, :title => "#{pat(:edit)} character", :class => 'list-row-action-wrapper-link'
+              =link_to tag_icon('trash-o'), :rel => :tooltip, :title => "#{pat(:delete)} character", :class => 'list-row-action-delete-one list-row-action-wrapper-link'
+              .popover.list-row-action-popover-delete-one.left
+                .arrow
+                %h3.popover-title=pat(:delete, :model => "character")
+                .popover-content
+                  = form_tag url(:characters, :destroy, :id => character.id), :method => :delete do
+                    =submit_tag pat(:delete), :class =>'list-row-action-popover-delete-one-btn btn btn-danger btn-small'
+                    .btn.btn-default.btn-small.cancel=pat(:cancel)

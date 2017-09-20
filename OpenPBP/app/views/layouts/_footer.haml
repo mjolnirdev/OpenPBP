@@ -1,0 +1,24 @@
+%footer.footer
+  .container
+    .columns
+      .column.is-3
+        %h5.is-size-5 #{ENV['WEBSITE_TITLE']}
+        %ul
+          %li 
+            %a About
+          %li
+            %a Contact Us
+          %li
+            %a{href: "https://github.com/mjolnirdev/OpenPBP"} 
+              %span.icon
+                %i.fa.fa-github
+              %span GitHub
+      .column.is-3
+        %h5.is-size-5 Legal
+        %ul
+          %li 
+            %a{href: "/privacy"} Privacy Policy
+          %li 
+            %a{href: "/tos"} Terms of Use
+      .column.is-6
+        %p #{ENV['WEBSITE_TITLE']} is developed using the #{link_to("Padrino","http://padrinorb.com/")} Ruby web framework and the #{link_to("Bulma", "http://bulma.io/")} CSS framework. It is released under the #{link_to("GPLv2 license", "https://www.gnu.org/licenses/gpl-2.0.html")}.

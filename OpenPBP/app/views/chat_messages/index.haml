@@ -1,0 +1,61 @@
+.chat-break.history
+  %span
+    %a{href: "#{url_builder(@campaign)}/ooc/history"}
+      Full History
+- previous_name = ""
+- if @old_chat_messages.count > 0
+  - @old_chat_messages.each_with_index do |chat_message, i|
+    .chat-message
+      - unless chat_message.name == previous_name
+        - unless i == 0
+          %hr
+        %strong #{chat_message.name}: 
+        #{chat_message.message}
+      - else
+        #{chat_message.message}
+    - previous_name = chat_message.name
+- previous_name = ""    
+- if @today_chat_messages.count > 0
+  .chat-break
+    %span
+      Today
+  - @today_chat_messages.each_with_index do |chat_message, i|
+    .chat-message
+      - unless chat_message.name == previous_name
+        - unless i == 0
+          %hr
+        %strong #{chat_message.name}: 
+        #{chat_message.message}
+      - else
+        #{chat_message.message}
+    - previous_name = chat_message.name
+- previous_name = ""    
+- if @recent_chat_messages.count > 0
+  .chat-break
+    %span
+      Last Hour
+  - @recent_chat_messages.each_with_index do |chat_message, i|
+    .chat-message
+      - unless chat_message.name == previous_name
+        - unless i == 0
+          %hr
+        %strong #{chat_message.name}: 
+        #{chat_message.message}
+      - else
+        #{chat_message.message}
+    - previous_name = chat_message.name
+- previous_name = ""        
+- if @current_chat_messages.count > 0
+  .chat-break
+    %span
+      Recent
+  - @current_chat_messages.each_with_index do |chat_message, i|
+    .chat-message
+      - unless chat_message.name == previous_name
+        - unless i == 0
+          %hr
+        %strong #{chat_message.name}: 
+        #{chat_message.message}
+      - else
+        #{chat_message.message}
+    - previous_name = chat_message.name    

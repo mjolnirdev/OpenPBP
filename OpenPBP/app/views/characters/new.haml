@@ -1,0 +1,21 @@
+= partial 'campaigns/campaign_header'
+= partial 'layouts/breadcrumb'
+%section.section
+  .container
+    %h2.is-size-3.has-text-centered.title New Character
+    .columns
+      .column.is-4.is-offset-2
+        .box
+          = form_tag "#{url_builder(@campaign)}/characters/new", multipart: true do
+            = partial 'characters/form'
+            %a.button.is-medium.is-success.is-hidden{id: "save-crop"} 
+              Save Portrait
+            = submit_tag "Create Character", class: "button is-primary is-medium", id: "submit"
+      .column.is-4
+        %h4.is-size-4.has-text-centered.title 
+          Portrait Preview
+        #image-current.has-text-centered
+          %img{src: "#{cloudfront_url(@character.portrait, :character)}"}
+        #image-preview.is-hidden
+= partial 'chat_messages/sidebar'
+= partial 'notes/sidebar'

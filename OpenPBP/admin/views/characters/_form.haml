@@ -1,0 +1,61 @@
+- error = @character.errors.include?(:campaign_id)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :campaign_id, :class => 'control-label'
+  .controls
+    =f.text_field :campaign_id, :class => 'form-control input-large input-with-feedback', :autofocus => true
+    %span.help-inline=error ? f.error_message_on(:campaign_id, :class => 'text-error') : pat(:example)
+- error = @character.errors.include?(:user_id)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :user_id, :class => 'control-label'
+  .controls
+    =f.text_field :user_id, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:user_id, :class => 'text-error') : pat(:example)
+- error = @character.errors.include?(:charid)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :charid, :class => 'control-label'
+  .controls
+    =f.text_field :charid, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:charid, :class => 'text-error') : pat(:example)
+- error = @character.errors.include?(:name)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :name, :class => 'control-label'
+  .controls
+    =f.text_field :name, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:name, :class => 'text-error') : pat(:example)
+- error = @character.errors.include?(:portrait)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :portrait, :class => 'control-label'
+  .controls
+    =f.text_field :portrait, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:portrait, :class => 'text-error') : pat(:example)
+- error = @character.errors.include?(:bio)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :bio, :class => 'control-label'
+  .controls
+    ~f.text_area :bio, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:bio, :class => 'text-error') : pat(:example)
+- error = @character.errors.include?(:gm)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :gm, :class => 'control-label'
+  .controls
+    =f.check_box :gm, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:gm, :class => 'text-error') : pat(:example)
+- error = @character.errors.include?(:default)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :default, :class => 'control-label'
+  .controls
+    =f.check_box :default, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:default, :class => 'text-error') : pat(:example)
+- error = @character.errors.include?(:retired)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :retired, :class => 'control-label'
+  .controls
+    =f.check_box :retired, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:retired, :class => 'text-error') : pat(:example)
+
+.form-actions
+  =f.submit pat(:save), :class => 'btn btn-primary'
+  &nbsp;
+  =f.submit pat(:save_and_continue), :class => 'btn btn-info', :name => 'save_and_continue'
+  &nbsp;
+  =link_to pat(:cancel), url(:characters, :index), :class => 'btn btn-default'

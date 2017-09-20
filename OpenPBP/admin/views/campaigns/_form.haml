@@ -1,0 +1,49 @@
+- error = @campaign.errors.include?(:cid)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :cid, :class => 'control-label'
+  .controls
+    =f.text_field :cid, :class => 'form-control input-large input-with-feedback', :autofocus => true
+    %span.help-inline=error ? f.error_message_on(:cid, :class => 'text-error') : pat(:example)
+- error = @campaign.errors.include?(:slug)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :slug, :class => 'control-label'
+  .controls
+    =f.text_field :slug, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:slug, :class => 'text-error') : pat(:example)
+- error = @campaign.errors.include?(:title)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :title, :class => 'control-label'
+  .controls
+    =f.text_field :title, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:title, :class => 'text-error') : pat(:example)
+- error = @campaign.errors.include?(:description)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :description, :class => 'control-label'
+  .controls
+    ~f.text_area :description, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:description, :class => 'text-error') : pat(:example)
+- error = @campaign.errors.include?(:image)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :image, :class => 'control-label'
+  .controls
+    =f.text_field :image, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:image, :class => 'text-error') : pat(:example)
+- error = @campaign.errors.include?(:archived)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :archived, :class => 'control-label'
+  .controls
+    =f.check_box :archived, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:archived, :class => 'text-error') : pat(:example)
+- error = @campaign.errors.include?(:join_link)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :join_link, :class => 'control-label'
+  .controls
+    =f.text_field :join_link, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:join_link, :class => 'text-error') : pat(:example)
+
+.form-actions
+  =f.submit pat(:save), :class => 'btn btn-primary'
+  &nbsp;
+  =f.submit pat(:save_and_continue), :class => 'btn btn-info', :name => 'save_and_continue'
+  &nbsp;
+  =link_to pat(:cancel), url(:campaigns, :index), :class => 'btn btn-default'

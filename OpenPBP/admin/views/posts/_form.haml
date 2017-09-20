@@ -1,0 +1,37 @@
+- error = @post.errors.include?(:pid)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :pid, :class => 'control-label'
+  .controls
+    =f.text_field :pid, :class => 'form-control input-large input-with-feedback', :autofocus => true
+    %span.help-inline=error ? f.error_message_on(:pid, :class => 'text-error') : pat(:example)
+- error = @post.errors.include?(:scene_id)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :scene_id, :class => 'control-label'
+  .controls
+    =f.text_field :scene_id, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:scene_id, :class => 'text-error') : pat(:example)
+- error = @post.errors.include?(:user_id)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :user_id, :class => 'control-label'
+  .controls
+    =f.text_field :user_id, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:user_id, :class => 'text-error') : pat(:example)
+- error = @post.errors.include?(:character_id)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :character_id, :class => 'control-label'
+  .controls
+    =f.text_field :character_id, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:character_id, :class => 'text-error') : pat(:example)
+- error = @post.errors.include?(:post)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :post, :class => 'control-label'
+  .controls
+    ~f.text_area :post, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:post, :class => 'text-error') : pat(:example)
+
+.form-actions
+  =f.submit pat(:save), :class => 'btn btn-primary'
+  &nbsp;
+  =f.submit pat(:save_and_continue), :class => 'btn btn-info', :name => 'save_and_continue'
+  &nbsp;
+  =link_to pat(:cancel), url(:posts, :index), :class => 'btn btn-default'

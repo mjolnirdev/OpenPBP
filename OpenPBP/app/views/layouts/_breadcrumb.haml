@@ -1,0 +1,98 @@
+%nav.breadcrumb.campaign-breadcrumb.is-marginless(aria-label="breadcrumbs")
+  .container
+    %ul
+      - if @reply
+        %li
+          %a{href: "#{url_builder(@campaign)}"} #{@campaign.title}      
+        %li
+          %a{href: "#{url_builder(@campaign, @chapter)}"} #{@chapter.title}
+        %li
+          %a{href: "#{url_builder(@campaign, @chapter, @scene)}"} #{@scene.title}
+        %li.is-active
+          %a{href: "#{url_builder(@campaign, @chapter, @scene)}/#{@post.pid}/#{@reply.rid}"} Viewing Reply
+      - elsif @notes
+        %li
+          %a{href: "#{url_builder(@campaign)}"} #{@campaign.title}
+        %li.is-active
+          %a{href: "#{url_builder(@campaign)}/notes/"} Notes
+      - elsif @character
+        %li
+          %a{href: "#{url_builder(@campaign)}"} #{@campaign.title}
+        %li
+          %a{href: "#{url_builder(@campaign)}/characters/"} Characters
+        %li.is-active
+          %a{href: "#{url_builder(@campaign)}/characters/#{@character.charid}"}
+            %span #{@character.name}
+      - elsif @characters
+        %li
+          %a{href: "#{url_builder(@campaign)}"} #{@campaign.title}
+        %li.is-active
+          %a{href: "#{url_builder(@campaign)}/characters/"} Characters
+        %li
+          %a{href: "#{url_builder(@campaign)}/characters/new"}
+            %span.icon.is-small
+              %i.fa.fa-plus
+            %span New Character
+      - elsif @note
+        %li
+          %a{href: "#{url_builder(@campaign)}"} #{@campaign.title}      
+        %li
+          %a{href: "#{url_builder(@campaign, @chapter)}"} #{@chapter.title}
+        %li
+          %a{href: "#{url_builder(@campaign, @chapter, @scene)}"} #{@scene.title}
+        %li.is-active
+          %a{href: "#{url_builder(@campaign)}/notes/#{@note.nid}/#{@note.slug}"}
+            = if @note.title then @note.title else "New Note" end
+      - elsif @post
+        %li
+          %a{href: "#{url_builder(@campaign)}"} #{@campaign.title}      
+        %li
+          %a{href: "#{url_builder(@campaign, @chapter)}"} #{@chapter.title}
+        %li
+          %a{href: "#{url_builder(@campaign, @chapter, @scene)}"} #{@scene.title}
+        %li.is-active
+          %a{href: "#{url_builder(@campaign, @chapter, @scene)}/#{@post.pid}"} Viewing Post  
+      - elsif @scene
+        %li
+          %a{href: "#{url_builder(@campaign)}"} #{@campaign.title}      
+        %li
+          %a{href: "#{url_builder(@campaign, @chapter)}"} #{@chapter.title}
+        - if @scene.title != nil
+          %li.is-active
+            %a{href: "#{url_builder(@campaign, @chapter, @scene)}"} #{@scene.title}
+        - else
+          - if campaign_gm?(@campaign, session[:user_id])  
+            %li.is-active
+              %a{href: "#{url_builder(@campaign, @chapter)}/scenes/new"}
+                %span.icon.is-small
+                  %i.fa.fa-plus
+                %span New Scene  
+      - elsif @chapter
+        %li
+          %a{href: "#{url_builder(@campaign)}"} #{@campaign.title}
+        - if @chapter.title != nil
+          %li.is-active
+            %a{href: "#{url_builder(@campaign, @chapter)}"} #{@chapter.title}
+        -else
+          - if campaign_gm?(@campaign, session[:user_id])  
+            %li.is-active
+              %a{href: "#{url_builder(@campaign)}/chapters/new"}
+                %span.icon.is-small
+                  %i.fa.fa-plus
+                %span New Chapter
+        - unless @chapter.title == nil
+          - if campaign_gm?(@campaign, session[:user_id])  
+            %li
+              %a{href: "#{url_builder(@campaign, @chapter)}/scenes/new"}
+                %span.icon.is-small
+                  %i.fa.fa-plus
+                %span New Scene
+      - elsif @campaign
+        %li.is-active
+          %a{href: "#{url_builder(@campaign)}"} #{@campaign.title}
+        - if campaign_gm?(@campaign, session[:user_id])    
+          %li
+            %a{href: "#{url_builder(@campaign)}/chapters/new"}
+              %span.icon.is-small
+                %i.fa.fa-plus
+              %span New Chapter

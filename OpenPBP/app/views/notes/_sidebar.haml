@@ -1,0 +1,18 @@
+.quickview{id: "sidebar-notes"}
+  %header.quickview-header
+    %a.has-text-grey{id: "sidebar-notes-close"}
+      %span.icon
+        %i.fa.fa-chevron-right
+    %h3.is-size-5 Campaign Notes
+  .quickview-body{id: "sidebar-notes-content"}
+    %span Loading notes...
+:javascript
+  function getNotes(){
+    $.ajax({url: "#{url_builder(@campaign)}/notes/sidebar", cache: true, success: function(result){
+      $("#sidebar-notes-content").html(result);
+    }});
+  };
+%a.has-text-light{id: "sidebar-notes-expand"}
+  .note-expand
+    %span.icon
+      %i.fa.fa-bookmark

@@ -1,0 +1,45 @@
+= partial 'scenes/scene_header'
+= partial 'layouts/breadcrumb'
+%section.section
+  .container
+    .columns
+      .column.is-10
+        - @posts.each do |post|
+          %a(name="#{post.pid}")
+          .box{class: if post.character.gm then "gm" end}
+            - unless post.character.gm
+              .media
+                .media-left
+                  %p.image.is-96x96
+                    %a{href: "#{url_builder(@campaign)}/characters/#{post.character.charid}"}
+                      %img{src: "#{cloudfront_url(post.character.portrait, :character)}"}
+                .media-content.is-post-meta
+                  %p.is-size-5.title
+                    %a.has-text-dark{href: "#{url_builder(@campaign)}/characters/#{post.character.charid}"}
+                      #{post.character.name}
+                  %p.is-size-6.subtitle
+                    #{post.user.display_name}
+                = partial 'posts/menu', :locals => { :post => post }
+            .media
+              .media-content.content
+                = rd(post.post).html_safe
+                - if post.post_rolls
+                  = partial 'posts/dice', :locals => { :post => post}
+              - if post.character.gm
+                .media-right
+                  = partial 'posts/menu', :locals => { :post => post }
+            - if content_owner?(post, session[:user_id]) || campaign_gm?(@campaign, session[:user_id])
+              .add-dice.has-text-right
+                %a.add-dice.tooltip.is-tooltip-right(data-modal-id="#{post.pid}" data-tooltip="Add Dice")
+                  %img{src: "/images/add_dice.png"}
+            
+          = partial 'scenes/post_roll_modal', :locals => { :post => post}
+          - post.replies.eager_load(:character, :reply_rolls).each do |reply|
+            = partial 'scenes/replies', :locals => { :post => post, :reply => reply }
+            = partial 'scenes/reply_roll_modal', :locals => { :post => post, :reply => reply }
+          = partial 'scenes/new_reply', :locals => { :post => post }                     
+        = partial 'scenes/new_post'
+      .column.is-2.is-hidden-mobile
+        = partial 'scenes/quick_navigation'
+= partial 'chat_messages/sidebar'
+= partial 'notes/sidebar'          

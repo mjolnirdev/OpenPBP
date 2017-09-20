@@ -1,0 +1,12 @@
+export DOMAIN=openpbp.com
+export WEBSITE_TITLE=OpenPBP
+
+export AWS_ACCESS_KEY_ID=
+export AWS_SECRET_ACCESS_KEY=
+export AWS_REGION=
+export AWS_S3_BUCKET=
+export AWS_CLOUDFRONT_BASEURL=
+
+export SESSION_SECRET=
+export MYSQL_USERNAME=
+export MYSQL_PASSWORD=

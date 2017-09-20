@@ -1,0 +1,62 @@
+%ul.nav.nav-tabs
+  %li.active=link_to tag_icon(:list, pat(:list)), url(:reply_rolls, :index)
+  %li=link_to tag_icon(:plus, pat(:new)), url(:reply_rolls, :new)
+
+.tabs-content
+  %table#list.table.table-striped.table-hover.table-condensed
+    %thead
+      %tr
+        %th.header.list-menu
+          .dropdown
+            %a.list-menu-toggle.dropdown-toggle{:href => '#', :'data-toggle' => :dropdown}
+              =tag_icon :magic
+              %span.caret
+            %ul.list-menu.dropdown-menu{:role => :menu}
+              %li.list-menu-wrapper=link_to tag_icon('check-square-o', pat(:select_all)), '#', :id => 'select-all', :class => 'list-menu-link'
+              %li.list-menu-wrapper.list-menu-wrapper-disabled
+                =link_to tag_icon('square-o', pat(:deselect_all)), '#', :id => 'deselect-all', :class => 'list-menu-link list-menu-link-disabled'
+              %li.list-menu-divider.divider
+              %li.list-menu-wrapper.list-menu-wrapper-disabled
+                =link_to tag_icon('trash-o', pat(:delete_selected)), '#', :id => 'delete-selected', :class => 'list-menu-link list-menu-link-disabled'
+                .list-menu-popover-delete-selected.popover.right
+                  .arrow
+                  %h3.popover-title=pat(:delete_selected_title)
+                  .popover-content
+                    = form_tag url(:reply_rolls, :destroy_many), :method => :delete do
+                      =hidden_field_tag :reply_roll_ids, :'data-delete-many-ids' => true
+                      =submit_tag pat(:delete), :class =>'list-menu-popover-delete-selected-btn btn btn-danger btn-small'
+                      .btn.btn-default.btn-small.cancel=pat(:cancel)
+        %th.header= mat(:reply_roll, :id)
+        %th.header= mat(:reply_roll, :reply_id)
+        %th.header= mat(:reply_roll, :user_id)
+        %th.header= mat(:reply_roll, :rolled_dice)
+        %th.header= mat(:reply_roll, :results)
+        %th.header= mat(:reply_roll, :modifier)
+        %th.header= mat(:reply_roll, :created_at)
+        %th.header= mat(:reply_roll, :updated_at)
+        %th.header.list-row-action-header
+
+    %tbody
+      -@reply_rolls.each do |reply_roll|
+        %tr.list-row
+          %td.list-column.list-selectable
+            =check_box_tag 'reply_roll_ids[]', :value => reply_roll.id, :class => 'list-selectable-checkbox'
+          %td.list-column=reply_roll.id
+          %td.list-column=reply_roll.reply_id
+          %td.list-column=reply_roll.user_id
+          %td.list-column=reply_roll.rolled_dice
+          %td.list-column=reply_roll.results
+          %td.list-column=reply_roll.modifier
+          %td.list-column=time_ago_in_words reply_roll.created_at
+          %td.list-column=time_ago_in_words reply_roll.updated_at
+          %td.list-column.list-row-action
+            .list-row-action-wrapper
+              =link_to tag_icon(:edit), :href => url(:reply_rolls, :edit, :id => reply_roll.id), :rel => :tooltip, :title => "#{pat(:edit)} reply_roll", :class => 'list-row-action-wrapper-link'
+              =link_to tag_icon('trash-o'), :rel => :tooltip, :title => "#{pat(:delete)} reply_roll", :class => 'list-row-action-delete-one list-row-action-wrapper-link'
+              .popover.list-row-action-popover-delete-one.left
+                .arrow
+                %h3.popover-title=pat(:delete, :model => "reply_roll")
+                .popover-content
+                  = form_tag url(:reply_rolls, :destroy, :id => reply_roll.id), :method => :delete do
+                    =submit_tag pat(:delete), :class =>'list-row-action-popover-delete-one-btn btn btn-danger btn-small'
+                    .btn.btn-default.btn-small.cancel=pat(:cancel)

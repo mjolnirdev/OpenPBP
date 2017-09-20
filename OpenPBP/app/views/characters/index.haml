@@ -1,0 +1,46 @@
+= partial 'campaigns/campaign_header'
+= partial 'layouts/breadcrumb'
+- unless @characters.first.nil?
+  %section.section
+    .container
+      - @characters.in_groups_of(6, false).each do |group|
+        .columns
+          - group.each do |character|
+            .column.is-2
+              .card.has-ribbon
+                - if character.default == true
+                  .ribbon.is-danger.is-small
+                    Primary
+                - elsif content_owner?(character, session[:user_id])
+                  .ribbon.is-gray.is-small
+                    %a{href: "#{url_builder(@campaign)}/characters/#{character.charid}/primary"} Make Primary
+                %a{href: "#{url_builder(@campaign)}/characters/#{character.charid}"}
+                  .card-image
+                    %figure.image
+                      %img{src: cloudfront_url(character.portrait, :character)}
+                  .card-content
+                    %h3.title.is-size-6.has-text-centered #{character.name}
+                    %h4.subtitle.is-size-7.has-text-centered #{character.user.display_name}
+- unless @retired_characters.first.nil?
+  %section.section
+    .container
+      %h2.is-size-4.title.has-text-centered Retired Characters
+      - @retired_characters.in_groups_of(6, false).each do |group|
+        .columns
+          - group.each do |character|
+            .column.is-2
+              .card
+                .card-image
+                  %figure.image
+                    %img{src: cloudfront_url(character.portrait, :character)}
+                .card-content
+                  %h3.title.is-size-6.has-text-centered #{character.name}
+                  %h4.subtitle.is-size-7.has-text-centered #{character.user.display_name}
+
+%section.section
+  .container
+    .columns
+      .column.is-4.is-offset-4.has-text-centered
+        %a.button.is-primary.is-large{href: "#{url_builder(@campaign)}/characters/new"} Create New character
+= partial 'chat_messages/sidebar'
+= partial 'notes/sidebar'

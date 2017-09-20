@@ -1,0 +1,8 @@
+%ul.nav.nav-tabs
+  %li=link_to tag_icon(:list, pat(:list)), url(:campaign_memberships, :index)
+  %li=link_to tag_icon(:plus, pat(:new)), url(:campaign_memberships, :new)
+  %li.active=link_to tag_icon(:edit, pat(:edit)), url(:campaign_memberships, :edit, :id => @campaign_membership.id)
+
+.tabs-content
+  = form_for :campaign_membership, url(:campaign_memberships, :update, :id => @campaign_membership.id), :method => :put, :class => 'form-horizontal' do |f|
+    =partial 'campaign_memberships/form', :locals => { :f => f }

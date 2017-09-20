@@ -1,0 +1,16 @@
+= partial 'campaigns/campaign_header'
+= partial 'layouts/breadcrumb'
+%section.section
+  .container
+    %h2.is-size-3.has-text-centered.title #{@campaign.title} Join Link
+    .columns
+      .column.is-8.is-offset-2
+        .box
+          .field.has-addons
+            .control.is-expanded
+              %input.input{value: "https://#{ENV['DOMAIN']}/join/#{@join_link}"}
+            .control
+              %a.button.is-danger{href: "#{url_builder(@campaign)}/join_link/refresh"}
+                Refresh Link
+= partial 'chat_messages/sidebar'
+= partial 'notes/sidebar'  

@@ -1,0 +1,15 @@
+%section.hero.is-dark.is-campaign(style="background-image: url(#{cloudfront_url(@campaign.image, :campaign)});")
+  = partial 'campaigns/header_menu'
+  .hero-body
+    .container
+      - unless @scene.title == nil 
+        %h1.title
+          %span.shadow 
+            %a{href: "#{url_builder(@campaign, @chapter, @scene)}"} #{@scene.title}
+        %h2.subtitle
+          %span.shadow 
+            #{@scene.description}
+      - else
+        %h1.is-size-3.title.has-text-centered
+          %span.shadow 
+            %a{href: "#{url_builder(@campaign, @chapter)}"} #{@chapter.title}

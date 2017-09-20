@@ -1,0 +1,16 @@
+= partial 'campaigns/campaign_header'
+%section.section
+  .container
+    - @campaign_members.in_groups_of(6, false).each do |group|
+      .columns
+        - group.each do |member|
+          .column.is-2
+            .card.has-ribbon
+              - if campaign_gm?(@campaign, session[:user_id])
+                .ribbon.is-danger.is-small
+                  %a.has-text-light{href: "#{url_builder(@campaign)}/members/delete/#{member.id}"}(data-confirm="This action is permanent and irrevocable, are you sure?") Remove
+              .card-image
+                %figure.image
+                  %img{}
+              .card-content
+                %h4.title.is-size-6.has-text-centered #{member.user.display_name}

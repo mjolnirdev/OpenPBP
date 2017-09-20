@@ -1,0 +1,37 @@
+- error = @reply_roll.errors.include?(:reply_id)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :reply_id, :class => 'control-label'
+  .controls
+    =f.text_field :reply_id, :class => 'form-control input-large input-with-feedback', :autofocus => true
+    %span.help-inline=error ? f.error_message_on(:reply_id, :class => 'text-error') : pat(:example)
+- error = @reply_roll.errors.include?(:user_id)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :user_id, :class => 'control-label'
+  .controls
+    =f.text_field :user_id, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:user_id, :class => 'text-error') : pat(:example)
+- error = @reply_roll.errors.include?(:rolled_dice)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :rolled_dice, :class => 'control-label'
+  .controls
+    ~f.text_area :rolled_dice, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:rolled_dice, :class => 'text-error') : pat(:example)
+- error = @reply_roll.errors.include?(:results)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :results, :class => 'control-label'
+  .controls
+    ~f.text_area :results, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:results, :class => 'text-error') : pat(:example)
+- error = @reply_roll.errors.include?(:modifier)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :modifier, :class => 'control-label'
+  .controls
+    =f.text_field :modifier, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:modifier, :class => 'text-error') : pat(:example)
+
+.form-actions
+  =f.submit pat(:save), :class => 'btn btn-primary'
+  &nbsp;
+  =f.submit pat(:save_and_continue), :class => 'btn btn-info', :name => 'save_and_continue'
+  &nbsp;
+  =link_to pat(:cancel), url(:reply_rolls, :index), :class => 'btn btn-default'

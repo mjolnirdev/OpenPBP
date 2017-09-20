@@ -1,0 +1,33 @@
+- post.post_rolls.each do |roll|
+  - if roll.modifier != [] && roll.modifier[0].include?('>')
+    - successes, fails = 0,0
+    .dice-group
+      - roll.rolled_dice.zip(roll.results).each do |die, result|
+        .die{class: "#{die} #{success_check(result, roll.modifier[0])}"} #{result}
+        - if success_check(result, roll.modifier[0]) == 'success' then successes += 1 elsif success_check(result, roll.modifier[0]) == 'fail' then fails += 1 end
+      .die-equals =
+      .die-fails #{fails}
+      .die-successes #{successes}
+      .die-net #{successes - fails}
+      .die-delete
+        %a.has-text-grey{href: "#{url_builder(@campaign, @chapter, @scene)}/#{post.pid}/dice/delete/#{roll.id}"}(data-confirm="This action is permanent and irrevocable, are you sure?")
+          %span.icon.is-small.tooltip(data-tooltip="Delete Dice")
+            %i.fa.fa-times
+  - else
+    - i = 0
+    .dice-group
+      - roll.rolled_dice.zip(roll.results).each do |die, result|
+        .die{class: die} #{result}
+        - unless i == (roll.results.count - 1) 
+          .die-plus +
+        - i += 1
+      - if roll.modifier[0] != nil
+        .die-plus +
+        .die-modifier #{roll.modifier[0].to_i}
+      .die-equals =
+      .die-total 
+        = roll.results.inject(0, :+) + roll.modifier[0].to_i
+      .die-delete
+        %a.has-text-danger{href: "#{url_builder(@campaign, @chapter, @scene)}/#{post.pid}/dice/delete/#{roll.id}"}(data-confirm="This action is permanent and irrevocable, are you sure?")
+          %span.icon
+            %i.fa.fa-times

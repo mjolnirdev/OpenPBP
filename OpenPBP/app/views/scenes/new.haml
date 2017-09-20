@@ -1,0 +1,13 @@
+= partial 'scenes/scene_header'
+= partial 'layouts/breadcrumb'
+%section.section
+  .container
+    %h2.is-size-3.has-text-centered.title New Scene
+    .columns
+      .column.is-4.is-offset-4
+        .box
+          = form_tag "#{url_builder(@campaign, @chapter)}/scenes/new" do
+            = partial 'scenes/form'
+            = submit_tag "Create New Scene", class: "button is-primary is-medium"
+= partial 'chat_messages/sidebar'
+= partial 'notes/sidebar'              

@@ -1,0 +1,40 @@
+%section.hero.is-fullheight
+  .hero-body
+    .container
+      .columns
+        .column.is-4.is-offset-4
+          %h1.title
+            %a{href: "/"}
+              %img.image{src: "/images/logo_large.png", alt: "#{ENV['WEBSITE_TITLE']}"}
+          .box
+            - if @user.errors.first
+              .notification.is-danger 
+                %ul
+                - @user.errors.full_messages.each do |msg|
+                  %li #{msg}.
+            = form_tag '/signup' do
+              .field
+                %label.label{for: "email"} Email:
+                .control.has-icons-left.has-icons-right
+                  = text_field_tag :email, maxlength: "64", class: "input is-medium", placeholder: "e.g. john@protonmail.com"
+                  %span.icon.is-small.is-left
+                    %i.fa.fa-envelope
+              .field
+                %label.label{for: "display_name"} Display Name:
+                .control.has-icons-left.has-icons-right
+                  = text_field_tag :display_name, maxlength: "64", class: "input is-medium", placeholder: "e.g. John"
+                  %span.icon.is-small.is-left
+                    %i.fa.fa-user
+              .field
+                %label.label{for: "password"} Password:
+                .control.has-icons-left.has-icons-right
+                  = password_field_tag :password, maxlength: "240", class: "input is-medium"
+                  %span.icon.is-small.is-left
+                    %i.fa.fa-lock
+              .field
+                %label.label{for: "password_confirmation"} Confirm Password:
+                .control.has-icons-left.has-icons-right
+                  = password_field_tag :password_confirmation, maxlength: "240", class: "input is-medium"
+                  %span.icon.is-small.is-left
+                    %i.fa.fa-lock
+              = submit_tag "Signup", class: "button is-primary is-fullwidth is-large"

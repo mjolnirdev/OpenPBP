@@ -1,0 +1,13 @@
+= partial 'campaigns/campaign_header'
+= partial 'layouts/breadcrumb'
+%section.section
+  .container
+    %h2.is-size-3.has-text-centered.title Editing #{@campaign.title}
+    .columns
+      .column.is-6.is-offset-3
+        .box
+          = form_tag "#{url_builder(@campaign)}/edit", multipart: true do
+            = partial '/campaigns/form'
+            = submit_tag "Update Campaign", class: "button is-primary is-medium"
+= partial 'chat_messages/sidebar'
+= partial 'notes/sidebar'  

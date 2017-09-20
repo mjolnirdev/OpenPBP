@@ -1,0 +1,41 @@
+= partial 'notes/note_header'
+= partial 'layouts/breadcrumb'
+%section.section
+  .container
+    %h2.is-size-3.has-text-centered.title #{@note.title}
+    .box
+      .media
+        .media-content
+          = rd(@note.note).html_safe
+        .media-right
+          %ul
+            - if content_owner?(@note, session[:user_id])
+              %li
+                %a.has-text-grey{href: "#{url_builder(@campaign)}/notes/#{@note.nid}/#{@note.slug}/edit"}
+                  %span.icon.is-small.tooltip.is-tooltip-right(data-tooltip="Edit Note")
+                    %i.fa.fa-pencil
+            %li
+              %a.has-text-grey{href: "#{url_builder(@campaign, @note.post.scene.chapter, @note.post.scene)}\##{@note.post.pid}"}
+                %span.icon.is-small.tooltip.is-tooltip-right(data-tooltip="Link to Post")
+                  %i.fa.fa-link
+    .box
+      .media
+        %figure.media-left.is-hidden-touch
+          %p.image.is-128x128
+            %img{src: "#{cloudfront_url(@post.character.portrait, :character)}"}
+            %p.is-size-7.has-text-centered #{@post.character.portrait}
+        .media-content.content
+          = rd(@post.post).html_safe
+    - @post.replies.each do |reply|
+      .columns
+        .column.is-offset-1
+          .box
+            .media
+              %figure.media-left.is-hidden-touch
+                %p.image.is-96x96
+                  %img{src: "#{cloudfront_url(reply.character.portrait, :character)}"}
+                  %p.is-size-7.has-text-centered #{reply.character.portrait}
+              .media-content.content
+                = rd(reply.reply).html_safe
+= partial 'chat_messages/sidebar'
+= partial 'notes/sidebar'                

@@ -1,0 +1,11 @@
+= partial 'chapters/chapter_header'
+= partial 'layouts/breadcrumb'
+%section.section
+  .container
+    .columns
+      .column
+        - @scenes.each do |scene|
+          %h3.is-size-4 
+            %a{href: url_builder(@campaign, @chapter, scene)} #{scene.title}
+= partial 'chat_messages/sidebar'
+= partial 'notes/sidebar'

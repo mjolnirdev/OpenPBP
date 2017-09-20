@@ -1,0 +1,16 @@
+%aside.menu.scene-menu
+  %p.menu-label
+    Quick Navigation
+  %ul.menu-list
+    - if @scene.title == @campaign.chapters.last.scenes.last.title
+      %li
+        %a.is-active
+          Newest Scene
+    - else
+      %li
+        %a{href: "#{url_builder(@campaign,@campaign.chapters.last,@campaign.chapters.last.scenes.last)}"}
+          Newest Scene
+    -if @posts.count > 0
+      %li
+        %a{href: "\##{@posts.last.pid}"}
+          Last Post

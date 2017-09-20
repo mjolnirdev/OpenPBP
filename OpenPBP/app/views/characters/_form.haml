@@ -1,0 +1,27 @@
+.field
+  %label.label{for: "name"} Character Name:
+  .control.has-icons-left.has-icons-right
+    = text_field_tag :name, maxlength: "64", class: "input is-medium", :value => @character.name
+    %span.icon.is-small.is-left
+      %i.fa.fa-user
+.field
+  %label.label{for: "bio"} Bio:
+  .control
+    = text_area_tag :bio, class: "textarea", value: @character.bio
+  %p.help 
+    %span Supports
+    %span
+      %a markdown
+    %span formatting.
+.field
+  %label.label{for: "portrait"} Character Portrait:
+  .file.has-name
+    %label.file-label
+      = file_field_tag :portrait, class: "file-input", id: "file-input"
+      %span.file-cta
+        %span.file-icon
+          %i.fa.fa-upload
+        %span.file-label Choose a file...
+      %span.file-name your-character-portrait.jpg
+  %p.help PNG, JPG only.
+= hidden_field_tag :base64, id: "base64"
