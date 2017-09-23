@@ -11,7 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 * Ruby 2.3.1+ (Earlier versions may work but were not tested)
 * Ruby Gems
 * MySQL/MariaDB
-* Amazon AWS Account
+* Amazon AWS Bucket/CloudFront Distribution
 * Fresh Ubuntu 16.04 Server (Tested on Linode)
 * Direnv (Optional)
 
@@ -41,9 +41,12 @@ Install Direnv (optional)
 sudo apt install direnv
 ```
 
-Add Direnv to Your .bashrc and Refresh It
+Add Direnv to Your .bashrc
 ```
 echo 'eval "$(direnv hook bash)"' >> ~/.bashrc
+```
+Refresh Your Environment
+```
 source ~/.bashrc
 ```
 
@@ -57,7 +60,7 @@ Configure .envrc With Your Information
 nano .envrc
 ```
 
-Allow the Newly Edited File with Direnv
+Allow the Newly Edited .envrc with Direnv
 ```
 direnv allow
 ```

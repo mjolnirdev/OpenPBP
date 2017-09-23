@@ -1,9 +1,10 @@
-## Install Ruby with rbenv
-### Install Dependencies in Ubuntu:
+## Install Dependencies in Ubuntu:
 
 ```
 sudo apt install git build-essential libssl-dev libreadline-dev zlib1g-dev mariadb-server libmariadb-client-lgpl-dev libmariadb-client-lgpl-dev-compat
 ```
+
+## Install Ruby with rbenv
 
 ### Install rbenv:
 ```
@@ -92,10 +93,10 @@ gem install bundle
 ## Amazon AWS
 OpenPBP uses Amazon S3 and CloudFront to serve user submitted media. It's a cheap, scalable way to host media content from a highly available CDN. You will need the following:
 
-* An S3 Bucket setup.
+* An S3 Bucket.
   * You will need the `Bucket name`, `AWS Region` and two folders created inside the bucket. `campaign-images` and `character-portraits`.
 * A CloudFront distribution setup for that bucket.
-  * The `URL` for that bucket.
+  * The `URL` for that distribution. (e.g. xxxxxxxxxxxxxx.cloudfront.net)
 * Your `AWS Access Key ID` and `AWS Secret Key`
 
 The specifics of setting this up are outside of the scope of this README but it's a very simple process and guides are widely available.
