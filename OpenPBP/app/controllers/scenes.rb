@@ -19,7 +19,7 @@ Openpbp::App.controllers :scenes do
   end
 
   get :show, :map => "/:campaign_cid/:campaign_slug/:chapter_slug/:scene_slug", priority: :low do
-    @posts = @scene.posts.eager_load(:post_rolls, :character, :replies, :user)
+    @posts = @scene.posts.order(:created_at).eager_load(:post_rolls, :character, :replies, :user)
     last_visit(@scene, @campaign)
     render 'scenes/show'
   end

@@ -34,7 +34,7 @@
                   %img{src: "/images/add_dice.png"}
             
           = partial 'scenes/post_roll_modal', :locals => { :post => post}
-          - post.replies.eager_load(:character, :reply_rolls).each do |reply|
+          - post.replies.order(:created_at).eager_load(:character, :reply_rolls).each do |reply|
             = partial 'scenes/replies', :locals => { :post => post, :reply => reply }
             = partial 'scenes/reply_roll_modal', :locals => { :post => post, :reply => reply }
           = partial 'scenes/new_reply', :locals => { :post => post }                     
