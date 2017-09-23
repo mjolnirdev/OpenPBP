@@ -9,6 +9,5 @@ class Scene < ActiveRecord::Base
     self.title = params[:title]
     self.slug = slug_sanitize(params[:slug])
     self.description = params[:description]
-    self.theme = params[:theme]
   end
 end
