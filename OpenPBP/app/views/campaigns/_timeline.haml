@@ -1,7 +1,7 @@
 %ul.timeline
   %li.timeline-header
     %span.tag.is-medium.is-primary 
-      %a.has-text-white{href: "#{url_builder(@campaign, @campaign.chapters.last, @campaign.chapters.last.scenes.last)}"} Now
+      %a.has-text-white Now
   - @chapters.order(created_at: :desc).each do |chapter|
     - chapter.scenes.order(created_at: :desc).each do |scene|
       %li.timeline-item
@@ -19,4 +19,4 @@
         %h5.is-size-6.subtitle #{chapter.description}
   %li.timeline-header
     %span.tag.is-medium.is-primary 
-      %a.has-text-white{href: "#{url_builder(@campaign, @campaign.chapters.first, @campaign.chapters.last.scenes.first)}"} Start
+      %a.has-text-white Start
